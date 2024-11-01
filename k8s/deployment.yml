@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pumpkin-deployment
+  namespace: pumpkin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pumpkin
+  template:
+    metadata:
+      labels:
+        app: pumpkin
+    spec:
+      containers:
+      - name: pumpkin-container
+        image: ghcr.io/hikkoiri/pumpkin:latest
+        ports:
+        - containerPort: 25565
+        volumeMounts:
+        - mountPath: "/pumpkin"
+          name: pumpkin-storage
+      volumes:
+      - name: pumpkin-storage
+        persistentVolumeClaim:
+          claimName: pumpkin-pvc

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pumpkin-service
+  namespace: pumpkin
+spec:
+  selector:
+    app: pumpkin
+  ports:
+    - protocol: TCP
+      port: 25565
+      targetPort: 25565
+  type: ClusterIP
+
